@@ -3,6 +3,7 @@ from io import BytesIO, StringIO
 import pandas as pd
 import base64
 import requests
+from dotenv import load_dotenv 
 import os
 
 # Convert pdf to base64 image
@@ -19,7 +20,8 @@ def pdf_to_base64_image(pdf_path, first_page=1, last_page=1, image_format='JPEG'
 
 # Call gpt to parse base64 image
 def get_csv_tabel(contract_base64):
-  api_key = api_key=os.environ.get("OPENAI_API_KEY")
+  load_dotenv()
+  api_key = api_key=os.getenv("OPENAI_API_KEY")
   headers = {
     "Content-Type": "application/json",
     "Authorization": f"Bearer {api_key}"

@@ -1,6 +1,4 @@
 import dspy
-import os
-from dotenv import load_dotenv
 from pdf2table import pdf_to_base64_image, get_csv_tabel
 
 class GenerateQuestion(dspy.Signature):
@@ -53,9 +51,8 @@ if __name__ == "__main__":
     pdf_file_path = input("Enter the path to the PDF file: ")
     pdf_file_page = input("Enter the page number: ")
 
-    print("\n Initalizing DSPy ... \n")
-
     # Set up the LM
+    print("\n Initalizing DSPy ... \n")
     gpt_4o = dspy.LM(model='gpt-4o')
     dspy.settings.configure(lm=gpt_4o)
     init_dspy(pdf_file_path, int(pdf_file_page))
