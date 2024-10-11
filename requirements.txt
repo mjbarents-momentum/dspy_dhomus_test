@@ -1,3 +1,7 @@
-dspy-ai
-python-dotenv
-PyPDF2
+base64
+dspy
+pandas
+requests
+openai
+pdf2image
+pillow
