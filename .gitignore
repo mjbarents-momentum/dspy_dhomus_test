@@ -1,5 +1,4 @@
 # .gitignore
 .env
 .notebook.ipynb
-.gitignore
 /pdf
