@@ -6,7 +6,7 @@ from pdf2table import pdf_to_base64_image, get_csv_tabel
 class GenerateQuestion(dspy.Signature):
     """Generate a question that must be validated, based on the 'omschrijving' column of the first row."""
 
-    table = dspy.InputField(desc="Table with 'omschrijving' column")
+    df = dspy.InputField(desc="Table with 'omschrijving' column")
     question = dspy.OutputField(desc="A question that must be validated")
 
 class ValidateQuestion(dspy.Signature):
@@ -45,8 +45,9 @@ def init_dspy(pdf_file_path, pdf_file_page):
     validate_agent = Validator()
     val = validate_agent(pred.question)
 
-    # Print the validation answer
-    print(val.answer)
+    # Print the question and validation
+    print('Question: ', pred.question)
+    print('Can it be validated?: ', val.answer, '\n')
 
 if __name__ == "__main__":
     pdf_file_path = input("Enter the path to the PDF file: ")
@@ -55,7 +56,7 @@ if __name__ == "__main__":
     print("\n Initalizing DSPy ... \n")
 
     # Set up the LM
-    gpt_4o = dspy.OpenAI(model='gpt-4o')
+    gpt_4o = dspy.LM(model='gpt-4o')
     dspy.settings.configure(lm=gpt_4o)
     init_dspy(pdf_file_path, int(pdf_file_page))
 
